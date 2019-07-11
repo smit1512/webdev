@@ -1,0 +1,34 @@
+package com.st.employee.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.st.employee.service.EmployeeService;
+
+@WebServlet("/DeleteEmpDetails")
+public class DeleteEmpDetails extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	final Logger logger = Logger.getLogger(DeleteEmpDetails.class.getName());
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		int id = Integer.parseInt(req.getParameter("id"));
+		EmployeeService empService = new EmployeeService();
+		try {
+			empService.deleteEmployee(id);
+		} catch (SQLException e) {
+			String err = "Error in delete operation";
+			req.setAttribute("err",err);
+		}
+		RequestDispatcher rd = req.getRequestDispatcher("DisplayEmpDetails");
+		rd.forward(req, res);
+	}
+}

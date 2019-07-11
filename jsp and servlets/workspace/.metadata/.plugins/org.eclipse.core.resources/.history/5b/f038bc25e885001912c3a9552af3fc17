@@ -1,0 +1,52 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.Statement"%>
+<%@ page import="java.math.BigDecimal"%>
+<%@ page import="com.st.employee.service.EmplyoeeService"%>
+<%@ page import="com.st.employee.model.Employee"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee</title>
+
+</head>
+<body>
+<%!int id = 0;%>
+		<%
+			if(request.getParameter("id")!=null)
+				{
+					 id=Integer.parseInt(request.getParameter("id"));
+				     session.setAttribute("eid",id);
+				     EmplyoeeService s1 = new EmplyoeeService();
+				     Employee e = s1.getEmp(id);
+				     request.setAttribute("ename",e.getName());
+				     request.setAttribute("email",e.getEmail());
+				     request.setAttribute("eno",e.getContactNo());
+				}
+			else
+			{
+				id=0;
+				session.setAttribute("eid",id);
+			}
+		%>
+	<form name="f1" action="InsertEmpDetails?id=" onsubmit="return validate();">
+		Name : <input type="text" name="name" value="${ename}"><br>
+		Email id : <input type="email" name="email" value="${email}"><br>
+		Phone no :  <input type="number" name="no" value="${eno}"><br>
+		<input type="submit">
+	</form>
+	<!-- <c:set var="msg" value=""/> -->
+	<c:if test="${not empty requestScope.msg}">
+		<c:out value="${requestScope.msg}"></c:out>
+	</c:if>
+		<script type="text/javascript" src="validate.js">
+		
+		</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee</title>
+
+</head>
+<body>
+<%! int id = 0; %>
+		<%
+			if(request.getParameter("id")!=null)
+				{
+					id=Integer.parseInt(request.getParameter("id"));
+				     session.setAttribute("eid",id);
+				}
+			else
+			{
+				id=0;
+				session.setAttribute("eid",id);
+			}
+		%>
+	<form name="f1" action="InsertEmpDetails?id=" onsubmit="return validate();">
+		Name : <input type="text" name="name" value="${param.name}"><br>
+		Email id : <input type="email" name="email" value="${param.email}"><br>
+		Phone no :  <input type="number" name="no" value="${param.no}"><br>
+		<input type="submit">
+	</form>
+	<!-- <c:set var="msg" value=""/> -->
+	<c:if test="${not empty requestScope.msg}">
+		<c:out value="${requestScope.msg}"></c:out>
+	</c:if>
+		<script type="text/javascript">
+		function validate()
+		{
+			//e.preventDefault();
+			console.log("Hello")
+			var Name = document.f1.name.value;
+			var Email = document.f1.email.value;
+			var Pno = document.f1.no.value;
+			if (Name=="")                                  
+		    { 
+		        window.alert("Please enter your name."); 
+		        return false; 
+		    } 
+			if (Email=="")                                  
+		    { 
+		        window.alert("Please enter your email."); 
+		        return false; 
+		    } 
+			if (Pno=="")                                  
+		    { 
+		        window.alert("Please enter your phone no."); 
+		        return false; 
+		    } 
+			if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(f1.email.value)))
+			  {
+			    alert("You have entered an invalid email address!")
+			    return false;
+			  }
+			if(!(/^\d{10}$/.test(f1.no.value)))
+				{
+					alert("You have entered an invalid Phone number!")
+			    	return false;
+				}
+			if(!(/^[a-zA-Z ]+$/.test(f1.name.value)))
+				{
+					alert("You have entered an invalid name!")
+		    		return false;
+				}
+			return true;
+		}
+	</script>
+	
+</body>
+
+</html>

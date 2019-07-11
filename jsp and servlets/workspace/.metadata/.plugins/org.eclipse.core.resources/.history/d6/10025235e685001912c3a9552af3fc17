@@ -1,0 +1,37 @@
+package com.st.employee.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.st.employee.model.Employee;
+import com.st.employee.service.EmplyeeService;
+@WebServlet("/DisplayEmpDetails")
+public class DisplayEmpDetails extends HttpServlet
+{
+	private static final long serialVersionUID = 1L;
+
+	public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException
+	{
+		PrintWriter out = res.getWriter();
+		EmplyeeService empservice = new EmplyeeService();
+		List<Employee> emp;
+		try {
+			emp = empservice.getEmployees();
+			req.setAttribute("obj",emp);
+			RequestDispatcher rd = req.getRequestDispatcher("Display.jsp");
+			rd.include(req,res);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			out.println("Error in displaying");
+		}
+	}
+}

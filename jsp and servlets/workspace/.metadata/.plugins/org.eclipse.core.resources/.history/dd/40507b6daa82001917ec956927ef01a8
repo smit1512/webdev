@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border='1'>
+	<tr>
+		<td>Employee_id</td>
+		<td>Employee_name</td>
+		<td>Email_id</td>
+		<td>Phone_no</td>
+		<td>Edit</td>
+		<td>Delete</td>
+	</tr>
+	<c:forEach items="${requestScope.obj}" var="e">
+		<tr>
+		<td>${e.eid}</td>
+		<td>${e.ename}</td>
+		<td>${e.email}</td>
+		<td>${e.eno}</td>
+		<td><a href="RegisterEmpDetails.jsp?id=${e.eid}">Edit</a></td>
+		<td><a href="DeleteEmpDetails?id=${e.eid}">Delete</a></td>
+	</tr>
+	</c:forEach>
+	</table>
+</body>
+</html>

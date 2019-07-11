@@ -1,0 +1,17 @@
+package com.st.employee.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.st.employee.dao.Fetch;
+import com.st.employee.model.Employee;
+
+public class Service
+{
+	public List<Employee> getEmployees() throws SQLException
+	{
+		Fetch f1 = new Fetch();
+		List<Employee> emp= f1.getEmployee();
+		return emp;
+	}
+}

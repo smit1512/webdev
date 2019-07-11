@@ -1,0 +1,44 @@
+package employee;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/DeleteEmpDetails")
+public class DeleteEmpDetails extends HttpServlet
+{
+	public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException
+	{
+		PrintWriter out = res.getWriter();
+		res.setContentType("text/html");
+		int id = Integer.parseInt(req.getParameter("id"));
+		String sql = "delete from employee where id="+id;
+		try
+		{
+			ServletContext ctx = getServletContext();
+			Connection con = (Connection) ctx.getAttribute("mycon");
+			java.sql.Statement stmt =  con.createStatement();	
+			 stmt.executeUpdate(sql);
+		}catch(Exception e)
+		{
+			System.out.println("hi");
+			System.out.println(e.getMessage());
+		}
+		/*
+		out.println("Record Deleted");
+		out.println("<br>");
+		out.println("<html><body><a href='DisplayEmpDetails'>Go Back</a></body></html>");
+		*/
+		/*
+		RequestDispatcher rd = req.getRequestDispatcher("Display.jsp");
+		rd.forward(req,res);
+		*/
+	}
+}

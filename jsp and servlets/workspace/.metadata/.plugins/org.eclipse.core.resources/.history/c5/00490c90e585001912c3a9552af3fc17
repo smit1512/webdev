@@ -1,0 +1,9 @@
+package com.st.employee.controller;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+@WebServlet("/EditEmpDetails")
+public class EditEmpDetails extends HttpServlet
+{
+	
+}

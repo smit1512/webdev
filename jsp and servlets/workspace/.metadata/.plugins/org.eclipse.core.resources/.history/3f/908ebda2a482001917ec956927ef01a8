@@ -1,0 +1,9 @@
+package com.st.employee.model;
+
+public class Employee {
+	private int employeeId;
+	private String contactNo;
+	private String name;
+	private String email;
+	
+}

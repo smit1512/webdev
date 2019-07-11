@@ -1,0 +1,72 @@
+package com.st.employee.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.st.employee.service.EmployeeService;
+
+@WebServlet("/InsertEmpDetails")
+public class InsertEmpDetails extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		PrintWriter out = res.getWriter();
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		String n = req.getParameter("no");
+		String msg = "";
+		Double phoneNo = Double.parseDouble(n);
+		HttpSession session = req.getSession();
+		int eid = (int) session.getAttribute("eid");
+		EmployeeService empService = new EmployeeService();
+		if (name == "" || name == null) {
+			msg = "Please enter your name.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher rd = req.getRequestDispatcher("RegisterEmpDetails.jsp");
+			rd.forward(req, res);
+		} else if (email == "") {
+			msg = "Please enter your email.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher rd = req.getRequestDispatcher("RegisterEmpDetails.jsp");
+			rd.forward(req, res);
+		} else if (n == "" || n == null) {
+			msg = "Please enter your phone_no.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher rd = req.getRequestDispatcher("RegisterEmpDetails.jsp");
+			rd.forward(req, res);
+		} else if (n.length() != 10) {
+			msg = "You have entered an invalid Phone number!";
+			req.setAttribute("msg", msg);
+			RequestDispatcher rd = req.getRequestDispatcher("RegisterEmpDetails.jsp");
+			rd.forward(req, res);
+		}
+		if (eid == 0) {
+			try {
+				empService.insertEmployee(name, email, phoneNo);
+				RequestDispatcher rd = req.getRequestDispatcher("welcome.jsp");
+				rd.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+				out.println("Error in inserting");
+			}
+		}
+		else {
+			int id = (int) (session.getAttribute("eid"));
+			try {
+				empService.updateEmployee(name, email, phoneNo, id);
+				RequestDispatcher rd = req.getRequestDispatcher("welcome.jsp");
+				rd.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+				out.println("Error in inserting");
+			}
+		}
+	}
+}

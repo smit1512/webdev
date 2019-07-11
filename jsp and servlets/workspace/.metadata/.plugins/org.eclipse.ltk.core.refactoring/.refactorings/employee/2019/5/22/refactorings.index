@@ -1,0 +1,22 @@
+1558962520815	Rename type 'display'
+1558962563432	Rename type 'insert'
+1558962630025	Rename resource 'register.jsp'
+1559215609249	Move compilation unit
+1559215631833	Move compilation unit
+1559215642725	Move compilation unit
+1559215657245	Delete element
+1559215668589	Move compilation unit
+1559215679808	Move compilation unit
+1559215692917	Move compilation unit
+1559215766521	Move 'Display.jsp' to 'view'
+1559215781059	Move 'Login.jsp' to 'view'
+1559215796534	Move 'RegisterEmpDetails.jsp' to 'view'
+1559215807485	Move 'welcome.jsp' to 'view'
+1559215817404	Move 'validate.js' to 'view'
+1559218206149	Move 'Display.jsp' to 'WebContent'
+1559218217384	Move 'Login.jsp' to 'WebContent'
+1559218223599	Move 'RegisterEmpDetails.jsp' to 'WebContent'
+1559218228600	Move 'validate.js' to 'WebContent'
+1559218244013	Move 'welcome.jsp' to 'WebContent'
+1559218259574	Delete element
+1559223459442	Rename type 'Fetch'

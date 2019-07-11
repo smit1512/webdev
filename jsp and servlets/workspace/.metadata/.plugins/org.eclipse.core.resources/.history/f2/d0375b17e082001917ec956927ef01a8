@@ -1,0 +1,30 @@
+package com.st.employee.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.st.employee.dao.Fetch;
+import com.st.employee.model.Employee;
+
+public class Service
+{
+	Fetch f1 = new Fetch();
+	public List<Employee> getEmployees() throws SQLException
+	{
+		List<Employee> emp= f1.getEmployee();
+		return emp;
+	}
+	public void insertEmployee(String name,String email,double pno) throws SQLException
+	{
+		f1.insertEmployee(name, email, pno);
+	}
+	public void updateEmployee(String name,String email,double pno,int id) throws SQLException
+	{
+		f1.updateEmployee(name, email, pno, id);
+	}
+	public void deleteEmployee(int id) throws SQLException
+	{
+		f1.deleteEmployee(id);
+	}
+}
